@@ -4,7 +4,7 @@ import json
 
 if __name__ == '__main__':
 
-    bank=500
+    bank=50
     startGame()
 
     while True:
@@ -19,6 +19,8 @@ if __name__ == '__main__':
         if playGame == 'S' or playGame == 's':
             answer = 1
             printSquadDetails()
+            raw_input("Press Enter to go back to the Squad Menu...")
+
         elif playGame == 'R' or playGame == 'r':
             printRoster()
 
@@ -26,10 +28,9 @@ if __name__ == '__main__':
             if buy == 'Y' or buy == 'y':
                 buyMember()
 
-
-
         elif playGame == 'D' or playGame == 'd':
             deleteMember()
+
         elif playGame == 'B' or playGame == 'b':
             battle = choice(['win', 'lose'])
             if battle == 'win':
@@ -39,10 +40,12 @@ if __name__ == '__main__':
             elif battle == 'lose':
                 print "Sorry, you lost the battle :( "
 
+            raw_input("\nPress Enter to go back in the Squad Menu...")
 
         elif playGame == 'E' or playGame == 'e':
             exit()
+
         else:
-            print "\t \t Please choose a valid option \n"
+            print "Please choose a valid option \n"
 
 

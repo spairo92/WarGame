@@ -1,18 +1,18 @@
 import json
-squadfile = "jsondata2/squad.json"
-rosterfile = "jsondata2/roster.json"
+squadfile = "squad.json"
+rosterfile = "roster.json"
 
 def startGame():
   answer1 = 1
   answer2 = 1
   while answer1:
-      playGame = raw_input('Do you want to play a game?: \n')
+      playGame = raw_input('Do you want to play a game?: [Y/N] \n')
       if playGame=='Y' or playGame == 'y':
           answer1 = 0
       elif playGame == 'N' or playGame == 'n':
           exit()
       else:
-          print "\t \t Please choose either Y or N \n"
+          print "Please choose either Y or N \n"
   while answer2:
       opponentType = raw_input("Enter Squad[1] or Create a new Squad[0] \n")
       if opponentType == '1':
@@ -48,7 +48,6 @@ def deleteMember():
 
     select = raw_input("Choose member ID you want to delete [0-n] \n")
 
-
     for i in xrange(len(squad_data)):
         if squad_data[i]["id"] == select:
             squad_data.pop(i)
@@ -65,6 +64,9 @@ def printSquadDetails():
               member['morale'] + "] Health ]" + member['health'] \
               + "] Experience [" + member['experience'] + "] Specialism [" + member['specialism'] + "] Skills [" + \
               member['skills'] + "] Items [" + member['items'] + "]"
+
+
+
 
 def printRoster():
     roster_data =  json.load(open(rosterfile))
