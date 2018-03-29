@@ -1,4 +1,5 @@
 from game_functions import *
+from random import choice
 import json
 
 if __name__ == '__main__':
@@ -30,7 +31,15 @@ if __name__ == '__main__':
         elif playGame == 'D' or playGame == 'd':
             deleteMember()
         elif playGame == 'B' or playGame == 'b':
-            answer = 0
+            battle = choice(['win', 'lose'])
+            if battle == 'win':
+                bank=bank+10
+                updateStats()
+                print "Congratulations, you won!\nYour Money and Captain/Hierophant experience upgraded :) "
+            elif battle == 'lose':
+                print "Sorry, you lost the battle :( "
+
+
         elif playGame == 'E' or playGame == 'e':
             exit()
         else:

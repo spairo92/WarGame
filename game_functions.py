@@ -1,6 +1,4 @@
 import json
-from collections import OrderedDict
-
 squadfile = "jsondata2/squad.json"
 rosterfile = "jsondata2/roster.json"
 
@@ -77,3 +75,12 @@ def printRoster():
               member['morale'] + "] Health ]" + member['health'] \
               + "] Experience [" + member['experience'] + "] Specialism [" + member['specialism'] + "] Skills [" + \
               member['skills'] + "] Items [" + member['items'] + "]"
+
+def updateStats():
+    squad_data = json.load(open(squadfile))
+    for member in squad_data:
+        if member['type'] == 'Captain' or member['type'] == 'Hierophant':
+            hey = member['experience']
+            hey2=int(hey)+50
+            member['experience']=str(hey2)
+    json.dump(squad_data, open(squadfile, 'w'))
