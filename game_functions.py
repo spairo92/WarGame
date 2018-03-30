@@ -2,6 +2,8 @@ import json
 squadfile = "squad.json"
 rosterfile = "roster.json"
 
+
+
 def startGame():
   answer1 = 1
   answer2 = 1
@@ -29,10 +31,32 @@ def printSquad():
     # print (data[0]['type'])
     print "My Squad: \nID\tMEMBER"
     for member in squad_data:
-        #if member['id'] == '1':
-            print member['id']+"\t"+member['type']
+        print member['id']+"\t"+member['type']
 
-def buyMember():
+
+def buyMember(money):
+    squad_data = json.load(open(squadfile))
+    roster_data = json.load(open(rosterfile))
+
+    select = raw_input("Choose member ID you want to buy [0-n] or [M] to go to Squad [M]enu \n")
+    if select == 'M' or select == 'm':
+        return money
+    else:
+        for member in roster_data:
+            if member['id'] == select:
+                cost = int(member['cost'])
+                if cost < money or cost == money:
+                    squad_data.append(member)
+                    json.dump(squad_data, open(squadfile, 'w'))
+                    money=money-int(member['cost'])
+                    return money
+                else:
+                    print "We are sorry, you don't have enough money to buy this member"
+                    raw_input("\nPress enter to go back to Squad Menu...")
+
+
+
+def buyMember2(money):
     squad_data = json.load(open(squadfile))
     roster_data = json.load(open(rosterfile))
 
@@ -42,16 +66,21 @@ def buyMember():
             squad_data.append(member)
 
     json.dump(squad_data, open(squadfile, 'w'))
+    return money
 
 def deleteMember():
     squad_data = json.load(open(squadfile))
-
     select = raw_input("Choose member ID you want to delete [0-n] \n")
-
-    for i in xrange(len(squad_data)):
-        if squad_data[i]["id"] == select:
-            squad_data.pop(i)
-            break
+    sure = raw_input("Are you sure you want to delte this member?[Y/N]")
+    if sure == 'Y' or sure == 'y':
+        for i in xrange(len(squad_data)):
+            if squad_data[i]["id"] == select:
+                squad_data.pop(i)
+                break
+    elif sure == 'N' or sure == 'n':
+        raw_input("Press enter to go to Squad Menu...")
+    else:
+        print "Please enter a valid answer"
 
     json.dump(squad_data, open(squadfile, 'w'))
 
@@ -64,8 +93,6 @@ def printSquadDetails():
               member['morale'] + "] Health ]" + member['health'] \
               + "] Experience [" + member['experience'] + "] Specialism [" + member['specialism'] + "] Skills [" + \
               member['skills'] + "] Items [" + member['items'] + "]"
-
-
 
 
 def printRoster():

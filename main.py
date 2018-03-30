@@ -2,16 +2,18 @@ from game_functions import *
 from random import choice
 import json
 
+global money
 if __name__ == '__main__':
 
-    bank=50
+
+    money = 70
     startGame()
 
     while True:
         print "Welcome in the WarGame! \n"
 
         printSquad()
-        print "\nMy Money: ", bank
+        print "\nMy Money: ", money
 
 
 
@@ -24,17 +26,17 @@ if __name__ == '__main__':
         elif playGame == 'R' or playGame == 'r':
             printRoster()
 
-            buy = raw_input("Do you want to buy any new member?")
+            buy = raw_input("Do you want to buy any new member?\n[Y]es or any other key to continue...")
             if buy == 'Y' or buy == 'y':
-                buyMember()
-
+                money = buyMember(money)
+                #money = buyMember2(money)
         elif playGame == 'D' or playGame == 'd':
             deleteMember()
 
         elif playGame == 'B' or playGame == 'b':
             battle = choice(['win', 'lose'])
             if battle == 'win':
-                bank=bank+10
+                money=money+10
                 updateStats()
                 print "Congratulations, you won!\nYour Money and Captain/Hierophant experience upgraded :) "
             elif battle == 'lose':
