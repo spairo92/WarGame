@@ -51,6 +51,7 @@ def buyMember(money):   #adding member from roster file to squad file
                 else:
                     print "We are sorry, you don't have enough money to buy this member"
                     raw_input("\nPress enter to go back to Squad Menu...")
+                    return money
 
 # def buyMember2(money):
 #     squad_data = json.load(open(squadfile))
