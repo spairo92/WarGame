@@ -3,8 +3,7 @@ squadfile = "squad.json"
 rosterfile = "roster.json"
 
 
-
-def startGame():
+def startGame():    #initial function
   answer1 = 1
   answer2 = 1
   while answer1:
@@ -25,16 +24,15 @@ def startGame():
       else:
           print "Please select a valid squad"
 
-def printSquad():
+def printSquad():   #print id and type of squad members
     # load json data from team file
     squad_data = json.load(open(squadfile))
-    # print (data[0]['type'])
+    # print (squad_data[0]['type'])
     print "My Squad: \nID\tMEMBER"
     for member in squad_data:
         print member['id']+"\t"+member['type']
 
-
-def buyMember(money):
+def buyMember(money):   #adding member from roster file to squad file
     squad_data = json.load(open(squadfile))
     roster_data = json.load(open(rosterfile))
 
@@ -54,21 +52,19 @@ def buyMember(money):
                     print "We are sorry, you don't have enough money to buy this member"
                     raw_input("\nPress enter to go back to Squad Menu...")
 
+# def buyMember2(money):
+#     squad_data = json.load(open(squadfile))
+#     roster_data = json.load(open(rosterfile))
+#
+#     select = raw_input("Choose member ID you want to buy [0-n] \n")
+#     for member in roster_data:
+#         if member['id'] == select:
+#             squad_data.append(member)
+#
+#     json.dump(squad_data, open(squadfile, 'w'))
+#     return money
 
-
-def buyMember2(money):
-    squad_data = json.load(open(squadfile))
-    roster_data = json.load(open(rosterfile))
-
-    select = raw_input("Choose member ID you want to buy [0-n] \n")
-    for member in roster_data:
-        if member['id'] == select:
-            squad_data.append(member)
-
-    json.dump(squad_data, open(squadfile, 'w'))
-    return money
-
-def deleteMember():
+def deleteMember():     #remove selected member from the squad
     squad_data = json.load(open(squadfile))
     select = raw_input("Choose member ID you want to delete [0-n] \n")
     sure = raw_input("Are you sure you want to delte this member?[Y/N]")
@@ -84,7 +80,7 @@ def deleteMember():
 
     json.dump(squad_data, open(squadfile, 'w'))
 
-def printSquadDetails():
+def printSquadDetails():    #print all stats for squad members
     squad_data = json.load(open(squadfile))
     for member in squad_data:
         print "ID " + member['id'] + "\t" + member['type'] + " costing (" + member['cost'] + ")\t with stats: Move [" + \
@@ -94,8 +90,7 @@ def printSquadDetails():
               + "] Experience [" + member['experience'] + "] Specialism [" + member['specialism'] + "] Skills [" + \
               member['skills'] + "] Items [" + member['items'] + "]"
 
-
-def printRoster():
+def printRoster():  #print all stats for roster members
     roster_data =  json.load(open(rosterfile))
     for member in roster_data:
         print "ID " + member['id'] + "\t" + member['type'] + " costing (" + member['cost'] + ")\t with stats: Move [" + \
@@ -105,11 +100,11 @@ def printRoster():
               + "] Experience [" + member['experience'] + "] Specialism [" + member['specialism'] + "] Skills [" + \
               member['skills'] + "] Items [" + member['items'] + "]"
 
-def updateStats():
+def updateStats():  #update experience
     squad_data = json.load(open(squadfile))
     for member in squad_data:
         if member['type'] == 'Captain' or member['type'] == 'Hierophant':
             hey = member['experience']
-            hey2=int(hey)+50
+            hey2=int(hey)+1
             member['experience']=str(hey2)
     json.dump(squad_data, open(squadfile, 'w'))
